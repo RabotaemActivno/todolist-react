@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './index.css';
 import { Todolist, TaskType } from './Todolist';
 import { v1 } from 'uuid';
 import { Header } from './header';
@@ -15,21 +15,15 @@ function App() {
 
   function addTodolist(title: string) {
     let defaultId = v1()
-    
-    let defaultTaskObj = [
-      { id: v1(), title: "spok", isDone: true },
-      { id: v1(), title: "chpock", isDone: true },
-      { id: v1(), title: "mock", isDone: false },
-      { id: v1(), title: "poook", isDone: false },
-      { id: v1(), title: "nock", isDone: false }
-    ]
-    
-    let newTodolist: TodolistType = { id: defaultId, title: title, filter: 'all'}
-    
-    setTodolists([newTodolist, ...todolists])
+
+    let defaultTaskObj:[] = []
+
+    let newTodolist: TodolistType = { id: defaultId, title: title, filter: 'all' }
+
+    setTodolists([...todolists, newTodolist])
 
     setTasks(Object.assign(tasksObj, {
-      [defaultId]: defaultTaskObj      
+      [defaultId]: defaultTaskObj
     }))
   }
 
@@ -43,7 +37,7 @@ function App() {
   function addTask(title: string, todolistId: string) {
     let newTask = { id: v1(), title: title, isDone: false }
     let tasks = tasksObj[todolistId]
-    let newTasks = [newTask, ...tasks]
+    let newTasks = [...tasks, newTask]
     tasksObj[todolistId] = newTasks
 
     setTasks({ ...tasksObj })
@@ -65,7 +59,7 @@ function App() {
       setTodolists([...todolists])
     }
   }
-  
+
   let [todolists, setTodolists] = useState<Array<TodolistType>>([
     // { id: todolistId1, title: 'what to learn', filter: 'active' },
     // { id: todolistId2, title: 'what to buy', filter: 'completed' },
@@ -79,7 +73,7 @@ function App() {
     setTasks({ ...tasksObj });
   }
   type TaskObj = {
-    [index: string] : {id: string, title: string, isDone: boolean}[]
+    [index: string]: { id: string, title: string, isDone: boolean }[]
   }
 
   let [tasksObj, setTasks] = useState<TaskObj>({
@@ -108,9 +102,9 @@ function App() {
   return (
     <div className="App">
       <Header addTodolist={addTodolist} />
-      <div className='Ap'>
+      <div className='wrapper'>
         {
-         todolists.map((tl) => {
+          todolists.map((tl) => {
 
             let tasksForTodolist = tasksObj[tl.id];
 
