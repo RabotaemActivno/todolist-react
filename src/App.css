@@ -1,10 +1,10 @@
 
-.Ap {
+.wrapper {
     padding: 30px;
     display: flex;
 }
 
-.Ap > div {
+.wrapper > div {
     margin-right: 50px;
 }
 
@@ -21,4 +21,14 @@
 }
 .is-done{
     opacity: 0.6;
+}
+.tl-class {
+    padding: 10px;
+    border: 1px solid black;
+}
+.img {
+    background-image: url(../img/Без\ названия.jpg);
+    background-size: no-repeat;
+    background-position: center;
+    background-size: cover;
 }

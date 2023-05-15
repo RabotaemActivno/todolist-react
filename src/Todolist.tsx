@@ -1,6 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import { FilterValuesType } from "./App";
-import { error } from "console";
 
 export type TaskType = {
     id: string 
@@ -20,16 +19,16 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
-    // Внешние функции
+    // Внешние функции 
     const [title, setTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
 
     const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
-        if (e.charCode === 13) {
+        if (e.key === 'Enter') {
             props.addTask(title, props.id)
             setTitle('')
         }
@@ -54,15 +53,15 @@ export function Todolist(props: PropsType) {
     //JSX-разметка
 
     return (
-        <div>
+        <div className="todolist">
             <h3>{props.title}<button onClick={removeTodolist}>x</button></h3>
             <div>
                 <input value={title} 
                 onChange={onNewTitleChangeHandler} 
-                onKeyPress={onKeyPressHandler} 
-                className={error ? "error": ''}/>
+                onKeyDown={onKeyDownHandler} 
+                className={error ? "error todolist__header_input": 'todolist__header_input'}
+                placeholder={error ? error : ''}/>
                 <button onClick={addTask}>+</button>
-                {error && <div className="error-message">{error}</div>}
             </div>
             <ul>
                 {
@@ -75,7 +74,7 @@ export function Todolist(props: PropsType) {
                         }
 
                         return <li className={t.isDone ? 'is-done': ''} key={t.id}>
-                            <input type="checkbox" 
+                            <input type="checkbox"  
                                     checked={t.isDone} 
                                     onChange={onChangeHandler} />
                             <span>{t.title}</span>
