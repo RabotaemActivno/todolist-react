@@ -1,0 +1,32 @@
+html, body{
+	margin: 0;
+	background: #eee;
+}
+
+.faq{
+	padding: 30px;
+	max-width: 600px;
+	overflow: hidden;
+}
+
+.faq .item{
+	margin: 20px 0;
+}
+
+.faq .item .ask{
+	font-size: 30px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.faq .item .answer{
+	background: #ff0;
+	overflow: hidden;
+	padding: 0 15px;
+	display: none;
+}
+
+.faq .item .answer.open{
+	display: block;
+}
+
